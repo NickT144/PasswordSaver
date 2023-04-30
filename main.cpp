@@ -59,40 +59,48 @@ bool check(string c){
 
 int main() {
     int IDnum;
-    string choice;
     string start = "yes";
     string password;
+    int choice;
     sqlite3 *db;
     sqlite3_stmt *stmt;
     sqlite3_open("passDB.db", &db);
     while (check(start)) {
-        cout << "Are you creating a new account?" << "\n";
+        cout << "How can I help you? Answer with the corresponding number" << "\n";
+        cout << "   1. Create a new account" << "\n";
+        cout << "   2. Check passwords" << "\n";
+        cout << "   3. Add a password" << "\n";
         cin >> choice;
-        if (check(choice)) {
-            string sql = "select count(*) from user";
-            sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, 0);
-            while (sqlite3_step(stmt) != SQLITE_DONE) {
-                IDnum = sqlite3_column_int(stmt, 0);
-                createAccount(db, IDnum);
-                cout << "This is your ID: " + to_string(IDnum) << "\n";
+        switch(choice) {
+            case 1: {
+                string sql = "select count(*) from user";
+                sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, 0);
+                while (sqlite3_step(stmt) != SQLITE_DONE) {
+                    IDnum = sqlite3_column_int(stmt, 0);
+                    createAccount(db, IDnum);
+                    cout << "This is your ID: " + to_string(IDnum) << "\n";
+                }
+                break;
+            }
+            case 2: {
+                cout << "What is your ID?" << "\n";
+                cin >> IDnum;
+                cout<< "Passwords: " << "\n";
+                listPassword(db, stmt, IDnum);
+                break;
+            }
+            case 3: {
+                cout << "What is your ID?" << "\n";
+                cin >> IDnum;
+                cout << "What password do you want to add?" << "\n";
+                cin >> password;
+                insertPassword(db, IDnum, password);
+            }
+            default: {
+                continue;
             }
         }
-        cout << "Do you want to see your passwords?" << "\n";
-        cin >> choice;
-        if (check(choice)) {
-            cout << "What is your ID?" << "\n";
-            cin >> IDnum;
-            listPassword(db, stmt, IDnum);
-        }
-        cout << "Do you want to add a password?" << "\n";
-        cin >> choice;
-        if (check(choice)) {
-            cout << "What is your ID?" << "\n";
-            cin >> IDnum;
-            cout << "What password do you want to add?" << "\n";
-            cin >> password;
-            insertPassword(db, IDnum, password);
-        }
+
         cout<< "Do you want to continue?"<< "\n";
         cin >> start;
     }
