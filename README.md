@@ -12,7 +12,8 @@ Install from GitHub repository.
 
 ### Executing program
 
-Download program and run in an IDE.
+Download program and run in an IDE. The user will be given a prompt where they can choose between creating an account, listing passwords, or adding a password. If the
+use 
 
 ## Authors
  
