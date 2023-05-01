@@ -13,7 +13,7 @@ Install from GitHub repository.
 ### Executing program
 
 Download program and run in an IDE. The user will be given a prompt where they can choose between creating an account, listing passwords, or adding a password. If the
-use 
+user does not have an account, they will need to create a new one to save a password. Otherwise, they can choose between list passwords and add password. If they choose the first option, they will be asked for an ID. Then, passwords are listed for that one ID. If they choose the second option, the user will be asked for an ID and password. The ID and password is then inserted into the database. Once finished, the user is asked if they want to start over.
 
 ## Authors
  
