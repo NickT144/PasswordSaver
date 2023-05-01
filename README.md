@@ -15,7 +15,7 @@ Install from GitHub repository.
 Download program and run in an IDE.
 
 ## Authors
-
+ 
    [Nicholas Tran](https://github.com/NickT144)
 
 ## Version History
